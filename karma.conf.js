@@ -1,8 +1,19 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin")
 
 module.exports = function (config) {
   config.set({
+    resolve: {
+      alias: {
+        path: require.resolve("path-browserify")
+      },
+      fallback: {
+        stream: require.resolve("stream-browserify"),
+        path: false,
+      },
+      fallback: 'resolve.fallback: { "path": require.resolve("path-browserify") }',
+    },
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
